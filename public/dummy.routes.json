@@ -1,0 +1,50 @@
+{
+  "today": [
+    {
+      "lat": 17.385044,
+      "lng": 78.486671,
+      "timestamp": "2025-10-27T10:00:00Z",
+      "type": "wireless"
+    },
+    {
+      "lat": 17.3852,
+      "lng": 78.4868,
+      "timestamp": "2025-10-27T10:00:10Z",
+      "type": "wireless"
+    },
+    {
+      "lat": 17.38545,
+      "lng": 78.4871,
+      "timestamp": "2025-10-27T10:00:20Z",
+      "type": "manual"
+    }
+  ],
+  "yesterday": [
+    {
+      "lat": 17.384,
+      "lng": 78.485,
+      "timestamp": "2025-10-26T10:00:00Z",
+      "type": "wireless"
+    },
+    {
+      "lat": 17.3842,
+      "lng": 78.4852,
+      "timestamp": "2025-10-26T10:00:10Z",
+      "type": "manual"
+    }
+  ],
+  "day3": [
+    {
+      "lat": 17.383,
+      "lng": 78.484,
+      "timestamp": "2025-10-25T10:00:00Z",
+      "type": "wireless"
+    },
+    {
+      "lat": 17.3832,
+      "lng": 78.4842,
+      "timestamp": "2025-10-25T10:00:10Z",
+      "type": "manual"
+    }
+  ]
+}
