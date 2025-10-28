@@ -1,5 +1,4 @@
-// src/components/RouteSelector.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 
 const DAYS = ["today", "yesterday", "3daysAgo"];
 const TYPES = ["wireless", "manual"];
@@ -20,10 +19,9 @@ export default function RouteSelector({ onSelectRoute }) {
     type.charAt(0).toUpperCase() + type.slice(1);
 
   return (
-    <div className="absolute top-4 left-4 z-[1000] p-4 bg-white shadow-xl rounded-lg w-full max-w-xs md:max-w-sm space-y-3">
+    <div className="absolute top-4 left-4 z-1000 p-4 bg-white shadow-xl rounded-lg w-full max-w-xs md:max-w-sm space-y-3">
       <h2 className="font-bold text-lg">Select Route</h2>
 
-      {/* Day selector */}
       <div className="flex gap-2">
         {DAYS.map((day) => (
           <button
@@ -40,7 +38,6 @@ export default function RouteSelector({ onSelectRoute }) {
         ))}
       </div>
 
-      {/* Type selector */}
       <div className="flex gap-2">
         {TYPES.map((type) => (
           <button
@@ -57,7 +54,6 @@ export default function RouteSelector({ onSelectRoute }) {
         ))}
       </div>
 
-      {/* Show button */}
       <button
         onClick={handleShowClick}
         className="w-full px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition"

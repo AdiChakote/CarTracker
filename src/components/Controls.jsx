@@ -1,6 +1,3 @@
-// src/components/Controls.jsx
-import React from "react";
-
 export default function Controls({
   currentPosition,
   speed,
@@ -9,10 +6,9 @@ export default function Controls({
   resetSimulation,
 }) {
   return (
-    <div className="absolute top-4 right-4 z-[1000] p-4 bg-white shadow-xl rounded-lg w-full max-w-xs md:max-w-sm">
+    <div className="absolute top-4 right-4 z-1000 p-4 bg-white shadow-xl rounded-lg w-full max-w-xs md:max-w-sm">
       <h2 className="text-lg font-bold mb-3">Vehicle Status</h2>
 
-      {/* Metadata */}
       <div className="space-y-1 text-sm">
         <p>
           Coordinate:{" "}
@@ -36,7 +32,6 @@ export default function Controls({
         </p>
       </div>
 
-      {/* Controls */}
       <div className="mt-4 flex gap-2">
         <button
           onClick={togglePlay}

@@ -1,8 +1,8 @@
-// src/App.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import VehicleMap from "./components/VehicleMap";
 import Controls from "./components/Controls";
 import RouteSelector from "./components/RouteSelector";
+import { calculateSpeedKmH } from "./utils/calculateSpeed";
 
 function App() {
   const [routeData, setRouteData] = useState([]);
@@ -34,7 +34,6 @@ function App() {
           }))
         );
 
-        // reset on new route
         setCurrentIndex(0);
         setIsPlaying(false);
       } catch (error) {
@@ -65,8 +64,7 @@ function App() {
       {routeData.length > 0 && (
         <Controls
           currentPosition={routeData[currentIndex]}
-          currentIndex={currentIndex}
-          routeData={routeData}
+          speed={calculateSpeedKmH(currentIndex, routeData)}
           isPlaying={isPlaying}
           togglePlay={togglePlay}
           resetSimulation={resetSimulation}
