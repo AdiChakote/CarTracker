@@ -1,35 +1,79 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import React, { useState, useEffect } from "react";
+import VehicleMap from "./components/VehicleMap";
+import Controls from "./components/Controls";
+import RouteSelector from "./components/RouteSelector";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [routeData, setRouteData] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [selectedRoute, setSelectedRoute] = useState({
+    day: "today",
+    type: "wireless",
+  });
+
+  useEffect(() => {
+    const fetchRoute = async () => {
+      try {
+        const response = await fetch("/dummy-routes.json");
+        const data = await response.json();
+
+        const { day, type } = selectedRoute;
+        const jsonDay = day === "3daysAgo" ? "day3" : day;
+
+        const filteredRoute = (data[jsonDay] || []).filter(
+          (point) => point.type === type
+        );
+
+        setRouteData(
+          filteredRoute.map((p) => ({
+            lat: p.lat,
+            lng: p.lng,
+            timestamp: p.timestamp,
+          }))
+        );
+
+        // reset on new route
+        setCurrentIndex(0);
+        setIsPlaying(false);
+      } catch (error) {
+        console.error("Error fetching route:", error);
+      }
+    };
+
+    fetchRoute();
+  }, [selectedRoute]);
+
+  const togglePlay = () => setIsPlaying((prev) => !prev);
+  const resetSimulation = () => {
+    setIsPlaying(false);
+    setCurrentIndex(0);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="h-screen w-full relative">
+      <RouteSelector onSelectRoute={setSelectedRoute} />
+
+      <VehicleMap
+        routeData={routeData}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        isPlaying={isPlaying}
+      />
+
+      {routeData.length > 0 && (
+        <Controls
+          currentPosition={routeData[currentIndex]}
+          currentIndex={currentIndex}
+          routeData={routeData}
+          isPlaying={isPlaying}
+          togglePlay={togglePlay}
+          resetSimulation={resetSimulation}
+        />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
